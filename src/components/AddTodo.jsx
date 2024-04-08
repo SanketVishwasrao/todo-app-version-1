@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import styles from './AddTodo.module.css';
+import {IoMdAddCircle} from 'react-icons/io';
 
 function AddTodo({onNewItem}) {
   const [todoName, setTodoName] = useState ('');
@@ -47,7 +48,7 @@ function AddTodo({onNewItem}) {
             className="btn btn-success kg-button"
             onClick={handleAddButtonClicked}
           >
-            Add
+            <IoMdAddCircle />
           </button>
         </div>
       </div>
