@@ -25,8 +25,16 @@ function App () {
 
   const handleNewItem = (itemName, itemDueDate) => {
     // console.log (`New Item Added: ${itemName} Date: ${itemDueDate}`);
-    const newItemAdded = {name: itemName, dueDate: itemDueDate};
-    setTodoItems ([...todoItems, newItemAdded]);
+    // const newItemAdded = {name: itemName, dueDate: itemDueDate};
+    // setTodoItems ([...todoItems, newItemAdded]);
+
+    setTodoItems (currValue => {
+      const newItemAdded = [
+        ...currValue,
+        {name: itemName, dueDate: itemDueDate},
+      ];
+      return newItemAdded;
+    });
   };
 
   const handleDeleteItem = todoItemName => {
