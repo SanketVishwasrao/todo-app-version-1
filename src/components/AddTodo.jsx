@@ -1,57 +1,66 @@
-import {useState} from 'react';
+import {useRef, useState} from 'react';
 import styles from './AddTodo.module.css';
 import {IoMdAddCircle} from 'react-icons/io';
 
 function AddTodo({onNewItem}) {
-  const [todoName, setTodoName] = useState ('');
-  const [dueDate, setDueDate] = useState ('');
+  // const [todoName, setTodoName] = useState ('');
+  // const [dueDate, setDueDate] = useState ('');
+  const todoNameElement = useRef ();
+  const todoDueDateElement = useRef ();
 
-  const handleNameChange = event => {
-    // console.log (event.target.value);
-    setTodoName (event.target.value);
-  };
+  // const handleNameChange = event => {
+  //   // console.log (event.target.value);
+  //   setTodoName (event.target.value);
+  //   noOfUpdates.current += 1;
+  // };
 
-  const handleDateChange = event => {
-    // console.log (event.target.value);
-    setDueDate (event.target.value);
-  };
+  // const handleDateChange = event => {
+  //   // console.log (event.target.value);
+  //   setDueDate (event.target.value);
+  //   console.log (`noOfUpdates are: ${noOfUpdates.current}`);
+  // };
 
-  const handleAddButtonClicked = () => {
+  const handleAddButtonClicked = event => {
+    event.preventDefault ();
+    const todoName = todoNameElement.current.value;
+    const dueDate = todoDueDateElement.current.value;
+    todoNameElement.current.value = '';
+    todoDueDateElement.current.value = '';
     onNewItem (todoName, dueDate);
-    setTodoName ('');
-    setDueDate ('');
+    // onNewItem (todoName, dueDate);
+    // setTodoName ('');
+    // setDueDate ('');
   };
 
   return (
     <div className="container">
-      <div className="row kg-row">
+      <form className="row kg-row" onSubmit={handleAddButtonClicked}>
         <div className="col-6">
           <input
             type="text"
+            ref={todoNameElement}
             className={styles['input-box']}
             placeholder="Enter Todo Here"
-            value={todoName}
-            onChange={handleNameChange}
+            // value={todoName}
+            // onChange={handleNameChange}
           />
         </div>
         <div className="col-4">
           <input
             type="date"
+            ref={todoDueDateElement}
             className={styles['input-box']}
-            value={dueDate}
-            onChange={handleDateChange}
+            // value={dueDate}
+            // onChange={handleDateChange}
           />
         </div>
         <div className="col-1">
-          <button
-            type="button"
-            className="btn btn-success kg-button"
-            onClick={handleAddButtonClicked}
-          >
+          <button type="submit" className="btn btn-success kg-button">
+            {/* onClick={handleAddButtonClicked} */}
             <IoMdAddCircle />
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
